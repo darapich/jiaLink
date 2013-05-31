@@ -3,6 +3,7 @@
 <head>
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/gumby.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/style.css" />
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/libs/modernizr-2.6.2.min.js"></script>
     <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/libs/gumby.js"></script>
