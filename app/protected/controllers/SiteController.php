@@ -66,10 +66,10 @@ class SiteController extends Controller
     */
     public function actionSignup()
     {
-        $model = new SignupForm;
+        $model = new SignupForm();
         if (isset($_POST['SignupForm'])) {
             $model->attributes = $_POST['SignupForm'];
-            if ($model->saveAndSendConfirm()) {
+            if ($model->validate() && $model->saveAndSendConfirm()) {
                 echo 'signup';
             }
         }
