@@ -13,6 +13,7 @@ return array(
     // preloading 'log' component
     'preload'=>array(
         'log',
+        'bootstrap',
     ),
 
     // autoloading model and component classes
@@ -35,6 +36,10 @@ return array(
 
     // application components
     'components'=>array(
+        'bootstrap' => array(
+            'class' => 'ext.bootstrap.components.Bootstrap',
+            'responsiveCss' => true,
+        ),
         'user'=>array(
             // enable cookie-based authentication
             'allowAutoLogin'=>true,

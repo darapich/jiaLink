@@ -6,33 +6,21 @@ $this->breadcrumbs=array(
 ?>
 Sign Up
 <div class="row">
-<form action="<?php echo $this->createUrl('/site/signup'); ?>" name="user_signup_form">
-    <fieldset class="ten columns">
-        <ul>
-            <li class="field">
-                <label class="inline three columns" for="email">Email</label>
-                <input class="wide text input" id="email" type="text" placeholder="something@something.com" />
-            </li>
-            <li class="field">
-                <label class="inline three columns" for="password">Password</label>
-                <input class="wide password input" id="password" type="password" placeholder="*******" />
-            </li>
-            <li class="field">
-                <label class="inline three columns" for="confirm_password">Confirm Password</label>
-                <input class="wide password input" id="confirm_password" type="password" placeholder="*******" />
-            </li>
-            <li class="field">
-                <label class="inline three columns" for="first_name">First Name</label>
-                <input class="wide text input" id="text2" type="text" placeholder="John" />
-            </li>
-            <li class="field">
-                <label class="inline three columns" for="last_name">Last Name</label>
-                <input class="wide text input" id="text2" type="text" placeholder="wide input" />
-            </li>
-            <li class="field two columns">
-                <input class="pretty medium primary btn metro rounded " id="text2" type="button" value="Signup"/>
-            </li>
-        </ul>
-    </fieldset>
-</form>
+<?php $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+    'id' => 'searchForm',
+    'type' => 'horizontal',
+    'enableAjaxValidation' => true,
+    'enableClientValidation' => true,
+)); ?>
+<?php echo $form->textFieldRow($model, 'username', array('class'=>'input-medium')); ?>
+<?php echo $form->passwordFieldRow($model, 'password', array('class'=>'input-medium')); ?>
+<?php echo $form->passwordFieldRow($model, 'confirmPassword', array('class'=>'input-medium')); ?>
+<?php echo $form->textFieldRow($model, 'firstName', array('class'=>'input-medium')); ?>
+<?php echo $form->textFieldRow($model, 'lastName', array('class'=>'input-medium')); ?>
+
+<div class="form-actions">
+    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'Submit')); ?>
+</div>
+ 
+<?php $this->endWidget(); ?>
 </div>
