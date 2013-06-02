@@ -77,4 +77,14 @@ class SiteController extends Controller
         }
         $this->render('signup', array('model' => $model));
     }
+    /**
+    * Contact us
+    * 
+    */
+    public function actionDashboard()
+    {
+    	$id = Yii::app()->user->getId();
+    	$model = User::model()->findByPK($id);
+        $this->render('dashboard', array('userModel' => $model));
+    }
 }

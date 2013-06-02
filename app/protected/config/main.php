@@ -56,7 +56,7 @@ return array(
             'class'=>'CDbConnection',
             'connectionString'=>'mysql:host=localhost;dbname=JiaLink',
             'username'=>'root',
-            'password'=>'password',
+            'password'=>'19870106',
             'emulatePrepare'=>true,  // needed by some MySQL installations
         ),
         // uncomment the following to use a MySQL database
@@ -94,6 +94,6 @@ return array(
     // using Yii::app()->params['paramName']
     'params'=>array(
         // this is used in contact page
-        'adminEmail'=>'webmaster@example.com',
+        'adminEmail'=>'xueyuan@imajery.com',
     ),
 );
