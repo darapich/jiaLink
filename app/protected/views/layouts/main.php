@@ -2,7 +2,6 @@
 <html>
 <head>
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-</head>
 <body>
 <div class="container-fluid">
     <div class="row-fluid">
