@@ -53,9 +53,9 @@ class SignupForm extends CFormModel
         $user->password  = $user->encryptPassword($this->password);
         $user->token     = $token;
         $user->status    = 'pending';
-        if (!$user->save()) {
-            return false;
+        if ($user->save() && MailManager::sendConfirmNewUser($user)) {
+            return true;
         }
-        return true;
+        return false;
     }
 }

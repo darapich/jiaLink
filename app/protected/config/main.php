@@ -21,6 +21,7 @@ return array(
         'application.models.*',
         'application.models.form.*',
         'application.components.*',
+        'application.extensions.yii-mail.*',
     ),
 
     'modules'=>array(
@@ -39,6 +40,20 @@ return array(
         'bootstrap' => array(
             'class' => 'ext.bootstrap.components.Bootstrap',
             'responsiveCss' => true,
+        ),
+        'mail' => array(
+            'class' => 'ext.yii-mail.YiiMail',
+            'transportType' => 'smtp',
+            'transportOptions' => array(
+                'host' => 'mailtrap.io',
+                'username' => 'jialink-7448a9bd0c1df74a',
+                'password' => 'a83d956f070ae15a',
+                'port' => '2525',
+                //'encryption'=>'tls',
+            ),
+            'viewPath' => 'application.views.mail',
+            'logging' => true,
+            'dryRun' => false
         ),
         'user'=>array(
             // enable cookie-based authentication
@@ -99,6 +114,6 @@ return array(
     // using Yii::app()->params['paramName']
     'params'=>array(
         // this is used in contact page
-        'adminEmail'=>'webmaster@example.com',
+        'adminEmail'=>'admin@jialink.ca',
     ),
 );

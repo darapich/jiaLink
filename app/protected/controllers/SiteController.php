@@ -70,9 +70,25 @@ class SiteController extends Controller
         if (isset($_POST['SignupForm'])) {
             $model->attributes = $_POST['SignupForm'];
             if ($model->validate() && $model->saveAndSendConfirm()) {
-                echo 'signup';
+                echo 'success';
             }
         }
         $this->render('signup', array('model' => $model));
+    }
+    
+    public function actionConfirm()
+    {
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+            $user = User::model()->findByAttributes(array(
+                'token' => $token,
+                'status' => 'pending'
+            ));
+            if ($user) {
+                $user->status = 'active';
+                $user->token  = '';
+                $user->save();
+            }
+        }
     }
 }
