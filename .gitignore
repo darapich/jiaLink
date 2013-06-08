@@ -1,0 +1,4 @@
+app/assets/
+app/protected/runtime/
+app/protected/config/params.php
+yii-framework/
