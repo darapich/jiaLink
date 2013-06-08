@@ -25,6 +25,3 @@ $this->breadcrumbs=array(
  
 <?php $this->endWidget(); ?>
 </div>
-<div class="row">
-     <?php echo CHtml::image(Yii::app()->getBaseUrl(true) . '/' . $model->imagePath, 'image', array("width"=>200)); ?>
-</div>

@@ -7,6 +7,8 @@
     <div class="row-fluid">
         <div class="span2">
             <?php
+                $profileImage = empty($this->profileImage) ? 'images/default_icon.jpg' : $this->profileImage;
+                echo CHtml::image(Yii::app()->getBaseUrl(true) . '/' . $profileImage, 'image', array("width"=>100));
                 $this->widget('bootstrap.widgets.TbMenu', array(
                     'type'=>'list',
                     'items' => array(

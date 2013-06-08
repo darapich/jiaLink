@@ -107,4 +107,14 @@ class User extends CActiveRecord
         return false;
     }
 
+    public function getRandomPassword()
+    {
+        $password = '';
+        $chars = array_merge(range('A','Z'), range('a','z'), range(0,9));
+        for($i=0; $i < 12; $i++) {
+            $password .= $chars[array_rand($chars)];
+        }
+        
+        return $password;
+    }
 }

@@ -72,4 +72,17 @@ class SignupForm extends CFormModel
         }
         return false;
     }
+    
+    public function resetPassword()
+    {
+        $user = User::model()->findByAttributes(array('username' => $this->username));
+        if ($user) {
+            $password = $user->getRandomPassword();
+            $user->password = $user->encryptPassword($password);
+            if ($user->save() && MailManager::sendForgotPassword($password, $user->username)) {
+                return true;
+            }
+            return false;
+        }
+    }
 }

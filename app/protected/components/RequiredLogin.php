@@ -14,7 +14,7 @@ class RequiredLogin extends CBehavior
         $request = $app->urlManager->parseUrl($app->request);
 
         // Restrict guests to public pages.
-        $allowed = array('site/login', 'site/logout', 'site/confirm', 'site/signup');
+        $allowed = array('site/login', 'site/logout', 'site/confirm', 'site/signup', 'site/forgotPassword');
         if ($user->isGuest && !in_array($request, $allowed)){
             $app->request->redirect('/site/login');
         }

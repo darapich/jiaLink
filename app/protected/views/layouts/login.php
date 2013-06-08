@@ -13,6 +13,7 @@
                         array('label'=>'List header', 'itemOptions'=>array('class'=>'nav-header')),
                         array('label'=>'Login', 'url'=>$this->createUrl('/site/login')),
                         array('label'=>'Sign up', 'url'=>$this->createUrl('/site/signup')),
+                        array('label'=>'Forgot Password', 'url'=>$this->createUrl('/site/forgotPassword')),
                     )
                 ));
             ?>

@@ -21,6 +21,8 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
     
+    public $profileImage = '';
+    
     public function filters()
     {
         return array(
@@ -39,5 +41,13 @@ class Controller extends CController
                 'users'=>array('*'),
             ),
         );
+    }
+    
+    public function init()
+    {
+        $user = User::model()->findByPk(Yii::app()->user->getId());
+        if ($user && $user->imagePath) {
+            $this->profileImage = $user->imagePath;
+        }
     }
 }

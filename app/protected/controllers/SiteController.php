@@ -65,7 +65,7 @@ class SiteController extends Controller
     */
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = new SignupForm;
         if (isset($_POST['SignupForm'])) {
             $model->attributes = $_POST['SignupForm'];
             if ($model->validate() && $model->saveAndSendConfirm()) {
@@ -102,5 +102,19 @@ class SiteController extends Controller
     	$id = Yii::app()->user->getId();
     	$model = User::model()->findByPK($id);
         $this->render('dashboard', array('userModel' => $model));
+    }
+    
+    public function actionForgotPassword()
+    {
+        $model = new SignupForm;
+        if (isset($_POST['SignupForm'])) {
+            $model->attributes = $_POST['SignupForm'];
+            if ($model->resetPassword()) {
+                return $this->render('success');
+            } else {
+                echo 'Something bad happen. Please re-entry your email!';
+            }
+        }
+        $this->render('forgotpassword', array('model' => $model));
     }
 }
