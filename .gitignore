@@ -1,4 +1,5 @@
 app/assets/
+app/images/
 app/protected/runtime/
 app/protected/config/params.php
 yii-framework/
