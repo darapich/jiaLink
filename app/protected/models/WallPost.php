@@ -1,19 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "User".
+ * This is the model class for table "WallPost".
  *
- * The followings are the available columns in table 'User':
+ * The followings are the available columns in table 'WallPost':
  * @property string $id
- * @property string $username
- * @property string $password
+ * @property string $ownerId
+ * @property string $post
+ * @property string $createTime
+ * @property string $imagePath
  */
-class User extends CActiveRecord
+class WallPost extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return User the static model class
+	 * @return WallPost the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -25,7 +27,7 @@ class User extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'User';
+		return 'WallPost';
 	}
 
 	/**
@@ -36,12 +38,12 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password', 'required'),
-			array('username', 'length', 'max'=>100),
-			array('password', 'length', 'max'=>250),
+			array('ownerId, post, createTime', 'required'),
+			array('ownerId', 'length', 'max'=>10),
+			array('post', 'length', 'max'=>250),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, password', 'safe', 'on'=>'search'),
+			array('id, ownerId, post, createTime', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,8 +65,9 @@ class User extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'username' => 'Username',
-			'password' => 'Password',
+			'ownerId' => 'Owner',
+			'post' => 'Post',
+			'createTime' => 'Create Time',
 		);
 	}
 
@@ -80,42 +83,12 @@ class User extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
+		$criteria->compare('ownerId',$this->ownerId,true);
+		$criteria->compare('post',$this->post,true);
+		$criteria->compare('createTime',$this->createTime,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
-    
-    function encryptPassword($password, $rounds = 7)
-    {
-        $salt = '';
-        $chars = array_merge(range('A','Z'), range('a','z'), range(0,9));
-        for($i=0; $i < 22; $i++) {
-            $salt .= $chars[array_rand($chars)];
-        }
-        return crypt($password, sprintf('$2a$%02d$', $rounds) . $salt);
-    }
-    
-    public function decryptPassword($password)
-    {
-        $hashPassword = $this->password;
-        if(crypt($password, $hashPassword) === $hashPassword) {
-            return true;
-        }
-        return false;
-    }
-
-    public function getRandomPassword()
-    {
-        $password = '';
-        $chars = array_merge(range('A','Z'), range('a','z'), range(0,9));
-        for($i=0; $i < 12; $i++) {
-            $password .= $chars[array_rand($chars)];
-        }
-        
-        return $password;
-    }
-
 }

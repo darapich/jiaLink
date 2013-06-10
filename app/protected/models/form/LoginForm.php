@@ -36,7 +36,9 @@ class LoginForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'rememberMe'=>'Remember me next time',
+            'username' => 'Email',
+            'password' => 'Password',
+			'rememberMe' => 'Remember me next time',
 		);
 	}
 
@@ -44,7 +46,8 @@ class LoginForm extends CFormModel
 	 * Authenticates the password.
 	 * This is the 'authenticate' validator as declared in rules().
 	 */
-	public function authenticate($attribute,$params)
+
+	public function authenticate($attribute, $params)
 	{
 		if(!$this->hasErrors())
 		{

@@ -22,6 +22,21 @@ class SignupForm extends CFormModel
         );
     }
     
+    /**
+     * @return array customized attribute labels (name=>label)
+     */
+    public function attributeLabels()
+    {
+        return array(
+            'id' => 'ID',
+            'username' => 'Email',
+            'password' => 'Password',
+            'confirmPassword' => 'Confirm Password',
+            'firstName' => 'First Name',
+            'lastName' => 'Last Name',
+        );
+    }
+    
     public function validateUsername($attribute, $params)
     {        
         $user = User::model()->exists('username = :username', array(':username' => $this->$attribute));
@@ -57,5 +72,18 @@ class SignupForm extends CFormModel
             return true;
         }
         return false;
+    }
+    
+    public function resetPassword()
+    {
+        $user = User::model()->findByAttributes(array('username' => $this->username));
+        if ($user) {
+            $password = $user->getRandomPassword();
+            $user->password = $user->encryptPassword($password);
+            if ($user->save() && MailManager::sendForgotPassword($password, $user->username)) {
+                return true;
+            }
+            return false;
+        }
     }
 }

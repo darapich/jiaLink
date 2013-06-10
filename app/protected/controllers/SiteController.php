@@ -2,6 +2,7 @@
 
 class SiteController extends Controller
 {
+
 	public function filters()
     {
         return array( 'accessControl' ); // perform access control for CRUD operations
@@ -13,7 +14,6 @@ class SiteController extends Controller
 	public function accessRules()
 	{
 	    return array(
-	    	/*
 	        array('allow', // allow authenticated user to perform actions
 	            'actions'=>array('Dashboard'),
 	            'users'=>array('@'),
@@ -24,19 +24,12 @@ class SiteController extends Controller
 	        ),
 			array('deny',  // deny all users anything not specified
 	            'users'=>array('*'),
-	        ),*/
+	        ),
 	    );
 	}
 
-	/**
-	 * This is the default 'index' action that is invoked
-	 * when an action is not explicitly requested by users.
-	 */
-	public function actionIndex()
-	{
-		$this->render('index');
-	}
-
+    public $defaultAction = 'login';
+    public $layout='//layouts/login';
 	/**
 	 * This is the action to handle external exceptions.
 	 */
@@ -56,25 +49,21 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-		$model=new LoginForm;
-
+		$model = new LoginForm;
 		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-		{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form') {
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
-
 		// collect user input data
-		if(isset($_POST['LoginForm']))
-		{
-			$model->attributes=$_POST['LoginForm'];
+		if(isset($_POST['LoginForm'])) {
+			$model->attributes = $_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect($this->createUrl('/wallPost/index'));
 		}
 		// display the login form
-		$this->render('login',array('model'=>$model));
+		$this->render('login', array('model' => $model));
 	}
 
 	/**
@@ -92,11 +81,11 @@ class SiteController extends Controller
     */
     public function actionSignup()
     {
-        $model = new SignupForm();
+        $model = new SignupForm;
         if (isset($_POST['SignupForm'])) {
             $model->attributes = $_POST['SignupForm'];
             if ($model->validate() && $model->saveAndSendConfirm()) {
-                echo 'success';
+                return $this->render('success');
             }
         }
         $this->render('signup', array('model' => $model));
@@ -113,19 +102,34 @@ class SiteController extends Controller
             if ($user) {
                 $user->status = 'active';
                 $user->token  = '';
-                $user->save();
+                if ($user->save()) {
+                    $this->redirect('/site/login');
+                }
             }
         }
     }
 
     /**
     * User Dashbord page
-    * 
     */
     public function actionDashboard()
     {
     	$id = Yii::app()->user->getId();
-    	$model = User::model()->findByPK((int)$id);
+    	$model = User::model()->findByPK($id);
         $this->render('dashboard', array('userModel' => $model));
+    }
+    
+    public function actionForgotPassword()
+    {
+        $model = new SignupForm;
+        if (isset($_POST['SignupForm'])) {
+            $model->attributes = $_POST['SignupForm'];
+            if ($model->resetPassword()) {
+                return $this->render('success');
+            } else {
+                echo 'Something bad happen. Please re-entry your email!';
+            }
+        }
+        $this->render('forgotpassword', array('model' => $model));
     }
 }

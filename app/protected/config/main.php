@@ -6,6 +6,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 
+require_once('params.php');
 return array(
     'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
     'name'=>'JiaLink',
@@ -33,6 +34,12 @@ return array(
             // If removed, Gii defaults to localhost only. Edit carefully to taste.
             'ipFilters'=>array('*'),
         ),
+    ),
+
+    'behaviors' => array(
+        'onBeginRequest' => array(
+            'class' => 'application.components.RequiredLogin'
+        )
     ),
 
     // application components
@@ -74,21 +81,10 @@ return array(
         
         'db'=>array(
             'class'=>'CDbConnection',
-            'connectionString'=>'mysql:host=localhost;dbname=JiaLink',
-            'username'=>'root',
-            'password'=>'19870106',
-            'emulatePrepare'=>true,  // needed by some MySQL installations
+            'connectionString'=>$params['db']['connectionString'],
+            'username'=>$params['db']['username'],
+            'password'=>$params['db']['password'],
         ),
-        // uncomment the following to use a MySQL database
-        /*
-        'db'=>array(
-            'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-            'emulatePrepare' => true,
-            'username' => 'root',
-            'password' => '',
-            'charset' => 'utf8',
-        ),
-        */
         'errorHandler'=>array(
             // use 'site/error' action to display errors
             'errorAction'=>'site/error',
