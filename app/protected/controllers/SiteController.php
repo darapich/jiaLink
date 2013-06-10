@@ -2,6 +2,32 @@
 
 class SiteController extends Controller
 {
+	public function filters()
+    {
+        return array( 'accessControl' ); // perform access control for CRUD operations
+    }
+
+	/**
+	 * This is the access rules for each action based on user group.
+	 */
+	public function accessRules()
+	{
+	    return array(
+	    	/*
+	        array('allow', // allow authenticated user to perform actions
+	            'actions'=>array('Dashboard'),
+	            'users'=>array('@'),
+	        ),
+	        array('allow', // allow authenticated user to perform actions
+	            'actions'=>array('Index', 'Login', 'Logout','Signup', 'Confirm', 'Error'),
+	            'users'=>array('*'),
+	        ),
+			array('deny',  // deny all users anything not specified
+	            'users'=>array('*'),
+	        ),*/
+	    );
+	}
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -93,13 +119,13 @@ class SiteController extends Controller
     }
 
     /**
-    * Contact us
+    * User Dashbord page
     * 
     */
     public function actionDashboard()
     {
     	$id = Yii::app()->user->getId();
-    	$model = User::model()->findByPK($id);
+    	$model = User::model()->findByPK((int)$id);
         $this->render('dashboard', array('userModel' => $model));
     }
 }
