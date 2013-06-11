@@ -2,6 +2,8 @@
 
 class SiteController extends Controller
 {
+    public $defaultAction = 'login';
+    public $layout='//layouts/login';
 
 	public function filters()
     {
@@ -14,22 +16,12 @@ class SiteController extends Controller
 	public function accessRules()
 	{
 	    return array(
-	        array('allow', // allow authenticated user to perform actions
-	            'actions'=>array('Dashboard'),
-	            'users'=>array('@'),
-	        ),
-	        array('allow', // allow authenticated user to perform actions
-	            'actions'=>array('Index', 'Login', 'Logout','Signup', 'Confirm', 'Error'),
-	            'users'=>array('*'),
-	        ),
-			array('deny',  // deny all users anything not specified
+			array('allow',  // deny all users anything not specified
 	            'users'=>array('*'),
 	        ),
 	    );
 	}
 
-    public $defaultAction = 'login';
-    public $layout='//layouts/login';
 	/**
 	 * This is the action to handle external exceptions.
 	 */
