@@ -35,10 +35,13 @@ class WallPostForm extends CFormModel
     
     public function getPost()
     {
-        return Yii::app()->db->createCommand()
-            -> select('ownerId, post')
-            ->from('WallPost')
-            ->order('createTime DESC')
+        $sql = '
+            SELECT imagePath, post 
+            FROM User u
+            JOIN WallPost w ON (u.id = w.ownerId)
+            ORDER BY w.createTime DESC
+            ';
+        return Yii::app()->db->createCommand($sql)
             ->queryAll();
     }
 }
