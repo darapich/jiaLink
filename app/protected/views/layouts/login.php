@@ -6,7 +6,7 @@
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="span2">
-        <?php
+            <?php
                 $this->widget('bootstrap.widgets.TbMenu', array(
                     'type'=>'list',
                     'items' => array(

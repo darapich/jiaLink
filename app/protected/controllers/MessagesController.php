@@ -91,9 +91,25 @@ class MessagesController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Messages');
+		$currentUserid = Yii::app()->user->getId();
+
+		$inboxdataProvider=new CActiveDataProvider('Messages', array(
+                    'criteria'=>array(
+                    	'condition'=>"receiverId=$currentUserid",
+	                    'order'=>'isRead ASC, createTime DESC'
+                    ),
+                )
+        );
+        $senddataProvider=new CActiveDataProvider('Messages', array(
+                    'criteria'=>array(
+                    	'condition'=>"senderId=$currentUserid",
+	                    'order'=>'createTime DESC',
+                    ),
+                )
+        );
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'inboxData'=>$inboxdataProvider,
+			'sendData'=>$senddataProvider,
 		));
 	}
 

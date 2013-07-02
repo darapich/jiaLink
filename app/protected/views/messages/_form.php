@@ -29,7 +29,7 @@
 	</div>
 	<div class="row">
 		<?php echo $form->labelEx($model,'receiverEmail'); ?>
-		<?php echo $form->textField($model,'receiverEmail',array('size'=>11,'maxlength'=>11)); ?>
+		<?php echo $form->textField($model,'receiverEmail',array('size'=>100,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'receiverEmail'); ?>
 	</div>
 

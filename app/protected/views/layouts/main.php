@@ -2,6 +2,13 @@
 <html>
 <head>
 <title><?php echo CHtml::encode($this->pageTitle); ?></title>
+<?php  
+  $baseUrl = Yii::app()->baseUrl; 
+  $cs = Yii::app()->getClientScript();
+  $cs->registerScriptFile($baseUrl.'/js/jquery.tools.min.js');
+  $cs->registerCssFile($baseUrl.'/css/style.css');
+?>
+</head>
 <body>
 <div class="container-fluid">
     <div class="row-fluid">
@@ -13,8 +20,8 @@
                     'type'=>'list',
                     'items' => array(
                         array('label'=>'List header', 'itemOptions'=>array('class'=>'nav-header')),
-                        array('label'=>'Home', 'url'=>'#', 'itemOptions'=>array('class'=>'active')),
-                        array('label'=>'Message', 'url'=>$this->createUrl('/message/index')),
+                        array('label'=>'Home', 'url'=>$this->createUrl('/site/dashboard'), 'itemOptions'=>array('class'=>'active')),
+                        array('label'=>'Message', 'url'=>$this->createUrl('/messages/index')),
                         array('label'=>'Applications', 'url'=>'#'),
                         array('label'=>'Another list header', 'itemOptions'=>array('class'=>'nav-header')),
                         array('label'=>'Profile Setting', 'url'=>$this->createUrl('/profile/setting')),
@@ -22,6 +29,8 @@
                         array('label'=>'Logout', 'url'=> $this->createUrl('/site/logout')),
                     )
                 ));
+                
+
             ?>
         </div>
         <div class="span10">

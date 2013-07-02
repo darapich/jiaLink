@@ -13,8 +13,29 @@ $this->menu=array(
 ?>
 
 <h1>Messages</h1>
+<ul class="message-tabs">
+	<li><a href="#">Inbox</a></li>
+	<li><a href="#">Send</a></li>
+	<li><a href="#">Draft</a></li>
+</ul>
+<div class="message-panes">
+	<div class="message-content">
+		<?php $this->widget('zii.widgets.CListView', array(
+			'dataProvider'=>$inboxData,
+			'itemView'=>'list',
+		)); ?>
+	</div>
+	<div class="message-content">
+		<?php $this->widget('zii.widgets.CListView', array(
+			'dataProvider'=>$sendData,
+			'itemView'=>'list',
+		)); ?>
+	</div>
+	<div class="message-content">Draft content</div>
+</div>
+<script type="text/javascript">
+	jQuery(document).ready( function() {
+		jQuery("ul.message-tabs").tabs("div.message-panes > div");
+	});
+</script>
 
-<?php $this->widget('zii.widgets.CListView', array(
-	'dataProvider'=>$dataProvider,
-	'itemView'=>'_view',
-)); ?>
