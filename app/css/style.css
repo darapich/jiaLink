@@ -1,5 +1,5 @@
 /* style for tabs  */
-ul.message-tabs {
+ul.tabs {
     margin:0 !important;
     padding:0;
     height:30px;
@@ -7,7 +7,7 @@ ul.message-tabs {
 }
 
 /* single tab */
-ul.message-tabs li {
+ul.tabs li {
     float:left;
     padding:0;
     margin:0;
@@ -15,7 +15,7 @@ ul.message-tabs li {
 }
 
 /* link inside the tab. uses a background image */
-ul.message-tabs a {
+ul.tabs a {
     float:left;
     font-size:13px;
     display:block;
@@ -33,13 +33,13 @@ ul.message-tabs a {
     -moz-border-radius:4px 4px 0 0;
 }
 
-ul.message-tabs a:hover {
+ul.tabs a:hover {
     background-color:#F7F7F7;
     color:#333;
 }
 
 /* selected tab */
-ul.message-tabs a.current {
+ul.tabs a.current {
     background-color:#ddd;
     border-bottom:1px solid #ddd;
     color:#000;
@@ -48,7 +48,7 @@ ul.message-tabs a.current {
 
 
 /* tab pane */
-.message-panes div.message-content {
+.panes div.content {
     display:none;
     border:1px solid #666;
     border-width:0 1px 1px 1px;

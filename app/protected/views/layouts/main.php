@@ -6,6 +6,7 @@
   $baseUrl = Yii::app()->baseUrl; 
   $cs = Yii::app()->getClientScript();
   $cs->registerScriptFile($baseUrl.'/js/jquery.tools.min.js');
+  $cs->registerScriptFile($baseUrl.'/js/customScript.js');
   $cs->registerCssFile($baseUrl.'/css/style.css');
 ?>
 </head>
