@@ -23,7 +23,7 @@
                         array('label'=>'List header', 'itemOptions'=>array('class'=>'nav-header')),
                         array('label'=>'Home', 'url'=>$this->createUrl('/site/dashboard'), 'itemOptions'=>array('class'=>'active')),
                         array('label'=>'Message', 'url'=>$this->createUrl('/messages/index')),
-                        array('label'=>'Applications', 'url'=>'#'),
+                        array('label'=>'Trade', 'url'=>$this->createUrl('/trade/index')),
                         array('label'=>'Another list header', 'itemOptions'=>array('class'=>'nav-header')),
                         array('label'=>'Profile Setting', 'url'=>$this->createUrl('/profile/setting')),
                         array('label'=>'Change Password', 'url'=> $this->createUrl('/profile/changePassword')),
