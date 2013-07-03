@@ -96,4 +96,19 @@ class Messages extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	/**
+	 * Retrieves the number of unread messages.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 */
+	public function unreadCount()
+	{
+		
+		return Yii::app()->db->createCommand()
+			    ->select('COUNT(id)')
+			    ->from('Messages')
+			    ->where('isRead=0')
+			    ->andwhere('receiverId=:id', array(':id' => Yii::app()->user->getId()))
+			    ->queryScalar();
+	}
 }

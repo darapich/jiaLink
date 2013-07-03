@@ -41,8 +41,14 @@ class MessagesController extends Controller
 	 */
 	public function actionView($id)
 	{
+		$model = $this->loadModel($id);
+		if($model->isRead == 0){
+			$model->isRead = 1;
+			$model->save();
+		}
+		
 		$this->render('view',array(
-			'model'=>$this->loadModel($id),
+			'model'=>$model,
 		));
 	}
 
@@ -107,9 +113,13 @@ class MessagesController extends Controller
                     ),
                 )
         );
+        $count = new Messages();
+        $count = $count->unreadCount();
+
 		$this->render('index',array(
 			'inboxData'=>$inboxdataProvider,
 			'sendData'=>$senddataProvider,
+			'unreadCount'=>$count,
 		));
 	}
 

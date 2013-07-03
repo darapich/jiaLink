@@ -14,7 +14,7 @@ $this->menu=array(
 
 <h1>Messages</h1>
 <ul class="tabs">
-	<li><a href="#">Inbox</a></li>
+	<li><a href="#">Inbox( <?php echo $unreadCount;?> )</a></li>
 	<li><a href="#">Send</a></li>
 	<li><a href="#">Draft</a></li>
 </ul>
@@ -22,13 +22,13 @@ $this->menu=array(
 	<div class="content">
 		<?php $this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$inboxData,
-			'itemView'=>'list',
+			'itemView'=>'inbox',
 		)); ?>
 	</div>
 	<div class="content">
 		<?php $this->widget('zii.widgets.CListView', array(
 			'dataProvider'=>$sendData,
-			'itemView'=>'list',
+			'itemView'=>'send',
 		)); ?>
 	</div>
 	<div class="content">Draft content</div>
